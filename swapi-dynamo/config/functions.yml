@@ -1,0 +1,6 @@
+hello:
+  handler: src/handlers/swapi.run
+  events:
+    - httpApi:
+        path: /swapi
+        method: get

@@ -1,0 +1,17 @@
+org: diegomego
+app: swapi-dynamo
+service: swapi-dynamo
+frameworkVersion: '3'
+
+provider:
+  name: aws
+  runtime: nodejs14.x
+
+functions:
+  - ${file(./config/functions.yml)}
+
+resources:
+  - ${file(./config/resources.yml)}
+
+plugins:
+  - serverless-offline

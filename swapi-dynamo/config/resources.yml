@@ -1,0 +1,16 @@
+Resources:
+    peopleTable:
+      Type: AWS::DynamoDB::Table
+      Properties:
+        TableName: peopleTable
+        AttributeDefinitions:
+          -
+            AttributeName: nombre
+            AttributeType: S
+        KeySchema:
+          -
+            AttributeName: nombre
+            KeyType: HASH
+        ProvisionedThroughput:
+          ReadCapacityUnits: 1
+          WriteCapacityUnits: 1

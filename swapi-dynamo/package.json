@@ -1,0 +1,16 @@
+{
+  "name": "swapi-dynamo",
+  "version": "1.0.0",
+  "scripts": {
+    "deploy": "sls deploy",
+    "offline": "sls offline"
+  },
+  "author": "DM2593@gmail.com",
+  "license": "ISC",
+  "dependencies": {
+    "aws-sdk": "^2.1150.0"
+  },
+  "devDependencies": {
+    "serverless-offline": "^8.8.0"
+  }
+}
