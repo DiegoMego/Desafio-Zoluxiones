@@ -1,92 +1,50 @@
 <!--
-title: 'AWS Simple HTTP Endpoint example in NodeJS'
-description: 'This template demonstrates how to make a simple HTTP API with Node.js running on AWS Lambda and API Gateway using the Serverless Framework.'
+title: 'Desafío Zoluxiones'
+description: 'Este proyecto es la implementación del reto propuesto por Zoluxiones'
 layout: Doc
 framework: v3
 platform: AWS
 language: nodeJS
-authorLink: 'https://github.com/serverless'
-authorName: 'Serverless, inc.'
-authorAvatar: 'https://avatars1.githubusercontent.com/u/13742415?s=200&v=4'
+authorLink: 'https://github.com/DiegoMego'
+authorName: 'Diego Mego'
 -->
 
-# Serverless Framework Node HTTP API on AWS
+# Desafío Zoluxiones
 
-This template demonstrates how to make a simple HTTP API with Node.js running on AWS Lambda and API Gateway using the Serverless Framework.
+Este proyecto es la implementación del reto propuesto por Zoluxiones
 
-This template does not include any kind of persistence (database). For more advanced examples, check out the [serverless/examples repository](https://github.com/serverless/examples/) which includes Typescript, Mongo, DynamoDB and other examples.
+## Uso
 
-## Usage
+### Pre-requisitos
 
-### Deployment
+Se debe tener configurado en el archivo local de credenciales de aws, un usuario con permisos para poder crear tablas en Dynamo, así como guardar y obtener registros.
+Además, el usuario deberá tener los permisos suficientes para gestionar API Gateway y Lambdas.
 
-```
-$ serverless deploy
-```
+### Ejecutar en local:
 
-After deploying, you should see output similar to:
-
-```bash
-Deploying aws-node-http-api-project to stage dev (us-east-1)
-
-✔ Service deployed to stack aws-node-http-api-project-dev (152s)
-
-endpoint: GET - https://xxxxxxxxxx.execute-api.us-east-1.amazonaws.com/
-functions:
-  hello: aws-node-http-api-project-dev-hello (1.9 kB)
-```
-
-_Note_: In current form, after deployment, your API is public and can be invoked by anyone. For production deployments, you might want to configure an authorizer. For details on how to do that, refer to [http event docs](https://www.serverless.com/framework/docs/providers/aws/events/apigateway/).
-
-### Invocation
-
-After successful deployment, you can call the created application via HTTP:
-
-```bash
-curl https://xxxxxxx.execute-api.us-east-1.amazonaws.com/
-```
-
-Which should result in response similar to the following (removed `input` content for brevity):
-
-```json
-{
-  "message": "Go Serverless v2.0! Your function executed successfully!",
-  "input": {
-    ...
-  }
-}
-```
-
-### Local development
-
-You can invoke your function locally by using the following command:
-
-```bash
-serverless invoke local --function hello
-```
-
-Which should result in response similar to the following:
+Se puede ejecutar localmente y probar los endpoints con la ayuda de una herramienta como Postman.
 
 ```
-{
-  "statusCode": 200,
-  "body": "{\n  \"message\": \"Go Serverless v3.0! Your function executed successfully!\",\n  \"input\": \"\"\n}"
-}
+$ npm install
+$ npm run offline
 ```
 
+Los endpoints son:
+- http://localhost:3000/swapi
+  - Este endpoint acepta los siguientes parámetros get:
+    - type (string): acepta sólo 'swapi' o 'list' (este último es para retornar los datos de dynamo). REQUERIDO.
+    - id (number): si el 'type' es 'swapi', este id se usa en el endpoint de SWAPI para retornar una persona. OPCIONAL.
+    - page (number): si el 'type' es 'swapi', se usa para indicar el número de página. Esto retorna la lista de personas paginadas usando SWAPI. OPCIONAL.
+    - Si el 'type' es 'swapi' y no se suministra otro parámetro, se asume por defecto 'page=1'. Si el 'type' es 'list', se retorna los registros almacenados en DynamoDB.
+- http://localhost:3000/
+  - Este es el endpoint para guardar un registro en dynamo. Se requieren los siguientes parámetros post:
+    - nombre (string): REQUERIDO.
+    - edad: (number): REQUERIDO.
+    - genero: acepta sólo 'M' o 'F'. REQUERIDO.
 
-Alternatively, it is also possible to emulate API Gateway and Lambda locally by using `serverless-offline` plugin. In order to do that, execute the following command:
+### Despliegue
 
-```bash
-serverless plugin install -n serverless-offline
 ```
-
-It will add the `serverless-offline` plugin to `devDependencies` in `package.json` file as well as will add it to `plugins` in `serverless.yml`.
-
-After installation, you can start local emulation with:
-
+$ npm install
+$ npm run deploy
 ```
-serverless offline
-```
-
-To learn more about the capabilities of `serverless-offline`, please refer to its [GitHub repository](https://github.com/dherault/serverless-offline).
