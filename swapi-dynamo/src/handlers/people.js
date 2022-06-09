@@ -1,6 +1,4 @@
-const routes = require('../routes');
 const { requestProcessor } = require('../processors/apiGateway');
-const SwapiService = require('../services/SwapiService');
 const DynamoService = require('../services/DynamoService');
 
 module.exports.run = async (event, context, callback) => {
@@ -15,19 +13,7 @@ module.exports.run = async (event, context, callback) => {
 };
 
 const eventRouter = async (payload) => {
-  let response;
   const params = payload.params;
-  const route = `${params.type?.toLowerCase()}`;
-  switch (route) {
-    case routes.swapi:
-      const swapiService = new SwapiService();
-      response = await swapiService.getPeople(params);
-      break;
-    case routes.list:
-      response = await (new DynamoService()).getPeople();
-      break;
-    default:
-      break;
-  }
+  const response = await (new DynamoService()).save(params);
   return response;
 };

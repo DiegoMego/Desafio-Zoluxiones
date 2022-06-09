@@ -4,3 +4,10 @@ hello:
     - httpApi:
         path: /swapi
         method: get
+
+people:
+  handler: src/handlers/people.run
+  events:
+    - httpApi:
+        path: /
+        method: post

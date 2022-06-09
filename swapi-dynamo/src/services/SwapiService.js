@@ -1,11 +1,8 @@
-// const AWS = require('aws-sdk');
-// const dynamodb = new AWS.DynamoDB();
-
 const api = require('../api/index');
 const { translate } = require('../shared/helpers');
 const { STATUSCODES, ERRORMESSAGES, LANGUAGES } = require('../shared/constants');
 
-class PeopleService {
+class SwapiService {
   constructor() {}
 
   async getPeople({ id, page }) {
@@ -76,4 +73,4 @@ class PeopleService {
   }
 }
 
-module.exports = PeopleService;
+module.exports = SwapiService;

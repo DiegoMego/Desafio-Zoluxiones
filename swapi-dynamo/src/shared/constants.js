@@ -13,8 +13,11 @@ const STATUSCODES = {
   INTERNAL_SERVER_ERROR: 500,
 };
 
+const DYNAMODB_TABLENAME = 'peopleTable';
+
 module.exports = {
   LANGUAGES,
   STATUSCODES,
   ERRORMESSAGES,
+  DYNAMODB_TABLENAME,
 };

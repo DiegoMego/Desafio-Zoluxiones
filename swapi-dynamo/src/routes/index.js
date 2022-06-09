@@ -1,3 +1,5 @@
 module.exports = {
-  people: "people"
+  swapi: "swapi",
+  save: "save",
+  list: "list",
 };
