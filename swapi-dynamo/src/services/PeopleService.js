@@ -9,16 +9,19 @@ class PeopleService {
   constructor() {}
 
   async getPeople({ id, page }) {
-    if (parseInt(id) && id > 0) return await this.get(id);
-    else if (page === undefined || (parseInt(page) && page > 0))
-      return await this.list(page);
-    return {
+    const error = {
       statusCode: STATUSCODES.BAD_REQUEST,
       body: JSON.stringify({
         success: false,
         errorMessage: ERRORMESSAGES.BAD_REQUEST,
       }),
     };
+    if (id !== undefined && id !== null && !parseInt(id))
+      return error;
+    if (id > 0) return await this.get(id);
+    else if (page === undefined || (parseInt(page) && page > 0))
+      return await this.list(page);
+    return error;
   }
 
   async list(page) {
@@ -49,7 +52,27 @@ class PeopleService {
   }
 
   async get(id) {
-    return await api.people.get(id);
+    let person = {};
+    try {
+      const swapiData = await api.people.get(id);
+      const parsedData = JSON.parse(swapiData);
+      person = translate(parsedData, LANGUAGES.SPANISH);
+    } catch (error) {
+      return {
+        statusCode: STATUSCODES.INTERNAL_SERVER_ERROR,
+        body: JSON.stringify({
+          success: false,
+          errorMessage: ERRORMESSAGES.INTERNAL_SERVER_ERROR,
+        }),
+      };
+    }
+    return {
+      statusCode: STATUSCODES.OK,
+      body: JSON.stringify({
+        success: true,
+        result: person,
+      }),
+    };
   }
 }
 
