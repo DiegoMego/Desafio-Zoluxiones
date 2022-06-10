@@ -11,7 +11,7 @@ class PeopleRequestParams {
     const schema = Joi.object().keys({
       nombre: Joi.string().required(),
       edad: Joi.number().integer().min(1).required(),
-      genero: Joi.any().valid('M', 'F')
+      genero: Joi.any().valid('M', 'F').required()
     });
 
     return schema.validate(this);

@@ -18,5 +18,9 @@
   "starships": "naves_estelares",
   "created": "creado",
   "edited": "editado",
-  "url": "url"
+  "blond": "rubio",
+  "fair": "claro",
+  "blue": "azul",
+  "male": "hombre",
+  "female": "mujer"
 }

@@ -48,3 +48,9 @@ Los endpoints son:
 $ npm install
 $ npm run deploy
 ```
+
+### Testing
+
+```
+$ npm run test
+```

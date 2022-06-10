@@ -3,7 +3,8 @@
   "version": "1.0.0",
   "scripts": {
     "deploy": "sls deploy",
-    "offline": "sls offline"
+    "offline": "sls offline",
+    "test": "jest"
   },
   "author": "DM2593@gmail.com",
   "license": "ISC",
@@ -12,6 +13,7 @@
     "joi": "^17.6.0"
   },
   "devDependencies": {
+    "jest": "^28.1.1",
     "serverless-offline": "^8.8.0"
   }
 }

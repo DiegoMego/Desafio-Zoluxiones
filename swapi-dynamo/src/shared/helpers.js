@@ -35,7 +35,9 @@ function translate(source, language) {
   const translated = {};
   for (const key in source) {
     if (key in lang) {
-      translated[lang[key]] = source[key];
+      translated[lang[key]] = (source[key] in lang ? lang[source[key]] : source[key]);
+    } else {
+      translated[key] = (source[key] in lang ? lang[source[key]] : source[key]);
     }
   }
   return translated;
@@ -43,5 +45,6 @@ function translate(source, language) {
 
 module.exports = {
   fetch,
+  languagePicker,
   translate,
 };
